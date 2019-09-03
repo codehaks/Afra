@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Portal.Persistance;
 
 namespace Servers.Vega
 {
@@ -16,6 +18,9 @@ namespace Servers.Vega
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<VegaDbContext>(options =>
+            options.UseSqlite("Data Source=vega.sqlite"));
+
             services.AddGrpc();
         }
 

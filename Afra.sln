@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal", "Web\Portal\Portal
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Web", "Web\Portal.Web\Portal.Web.csproj", "{28069796-4655-4AF2-9B22-E21CA2FB9926}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servers.Crux", "Servers\Servers.Crux\Servers.Crux.csproj", "{A243BA8C-3C52-4D9C-A77A-FF54B1E34E1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{28069796-4655-4AF2-9B22-E21CA2FB9926}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28069796-4655-4AF2-9B22-E21CA2FB9926}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28069796-4655-4AF2-9B22-E21CA2FB9926}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A243BA8C-3C52-4D9C-A77A-FF54B1E34E1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A243BA8C-3C52-4D9C-A77A-FF54B1E34E1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A243BA8C-3C52-4D9C-A77A-FF54B1E34E1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A243BA8C-3C52-4D9C-A77A-FF54B1E34E1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{DDA6CB18-4492-4760-81D0-3C9701B95BA9} = {FBE89056-A62C-4762-B475-0AC37B94F2A3}
 		{28069796-4655-4AF2-9B22-E21CA2FB9926} = {FBE89056-A62C-4762-B475-0AC37B94F2A3}
+		{A243BA8C-3C52-4D9C-A77A-FF54B1E34E1D} = {ED3D7CD7-C7EE-4350-BF9E-E403CFE90643}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {38D22B72-A3A0-4C88-89EC-1388819B3756}

@@ -8,7 +8,7 @@ namespace Portal.Application.Posts
 {
     public interface IPostService
     {
-        public Task Create(PostAddModel model);
+        public Task<int> Create(PostAddModel model);
         List<PostViewInfo> GetAll();
     }
 }

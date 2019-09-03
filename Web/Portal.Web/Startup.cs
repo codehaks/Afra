@@ -41,7 +41,13 @@ namespace Portal.Web
                 options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<PortalDbContext>();
 
-            services.AddRazorPages();
+            services.AddRazorPages().AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizeAreaFolder("User", "/");
+                //options.Conventions.AuthorizeFolder("/users",);
+                //options.Conventions.AuthorizeFolder("/admin", "RequireAdminRole");
+
+            });
             services.AddMvc();
             services.AddTransient<IPostService, PostService>();
 

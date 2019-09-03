@@ -17,7 +17,7 @@ namespace Portal.Application.Posts
         {
             _db = db;
         }
-        public async Task Create(PostAddModel model)
+        public async Task<int> Create(PostAddModel model)
         {
             var post = new Post
             {
@@ -26,8 +26,9 @@ namespace Portal.Application.Posts
                 TimeCreated = DateTime.Now
             };
 
-            _db.Posts.Add(post);
+            var result=_db.Posts.Add(post);
             await _db.SaveChangesAsync();
+            return result.Entity.Id;
         }
 
         public List<PostViewInfo> GetAll()

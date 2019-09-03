@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29209.62
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{FBE89056-A62C-4762-B475-0AC37B94F2A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Servers", "Servers", "{ED3D7CD7-C7EE-4350-BF9E-E403CFE90643}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal", "Web\Portal\Portal.csproj", "{DDA6CB18-4492-4760-81D0-3C9701B95BA9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Web", "Web\Portal.Web\Portal.Web.csproj", "{28069796-4655-4AF2-9B22-E21CA2FB9926}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDA6CB18-4492-4760-81D0-3C9701B95BA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDA6CB18-4492-4760-81D0-3C9701B95BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDA6CB18-4492-4760-81D0-3C9701B95BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDA6CB18-4492-4760-81D0-3C9701B95BA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28069796-4655-4AF2-9B22-E21CA2FB9926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28069796-4655-4AF2-9B22-E21CA2FB9926}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28069796-4655-4AF2-9B22-E21CA2FB9926}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28069796-4655-4AF2-9B22-E21CA2FB9926}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DDA6CB18-4492-4760-81D0-3C9701B95BA9} = {FBE89056-A62C-4762-B475-0AC37B94F2A3}
+		{28069796-4655-4AF2-9B22-E21CA2FB9926} = {FBE89056-A62C-4762-B475-0AC37B94F2A3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {38D22B72-A3A0-4C88-89EC-1388819B3756}
+	EndGlobalSection
+EndGlobal

@@ -22,9 +22,7 @@ namespace Portal.Application.Posts
             var post = new Post
             {
                 Body = model.Body,
-                Content = model.Content,
                 UserId = model.UserId,
-                MimeType = model.MimeType,
                 TimeCreated = DateTime.Now
             };
 
@@ -38,8 +36,6 @@ namespace Portal.Application.Posts
             {
                 Id = p.Id,
                 Body = p.Body,
-                Content = p.Content,
-                MimeType = p.MimeType,
                 UserId = p.UserId,
                 TimeCreated = p.TimeCreated
             }).ToList();

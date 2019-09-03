@@ -41,7 +41,6 @@ namespace Portal.Web.Areas.User.Pages.Posts
                 Content = ByteString.CopyFrom(ms1.ToArray()),
                 ContentType = PhotoFile.ContentType,
                 Name = PhotoFile.Name,
-                TimeCreated = DateTime.Now.ToString(),
                 UserId = "myuser"
             });
 

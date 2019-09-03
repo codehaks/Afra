@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Linq;
 
-namespace Portal.Persistance
+namespace Servers.Vega.Data
 {
     public class VegaDbContext : DbContext
     {

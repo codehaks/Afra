@@ -7,6 +7,7 @@ package FileManager;
 
 service FileService {
 	rpc UploadFile(UploadRequest) returns (UploadResponse);	
+	rpc DownloadFile(DownloadRequest) returns (DownloadResponse);
 }
 
 message UploadRequest{
@@ -25,4 +26,14 @@ message UploadResponse{
 enum FileUploadStatus {
   SUCCESS = 0;
   FAIL = 1;
+}
+
+message DownloadRequest{
+	int32 post_id=1;
+}
+
+message DownloadResponse{
+	string name=1;
+	bytes content=2;
+	string content_type=3;
 }

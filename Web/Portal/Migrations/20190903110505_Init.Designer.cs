@@ -10,7 +10,7 @@ using Portal.Persistance;
 namespace Portal.Migrations
 {
     [DbContext(typeof(PortalDbContext))]
-    [Migration("20190903110120_Init")]
+    [Migration("20190903110505_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

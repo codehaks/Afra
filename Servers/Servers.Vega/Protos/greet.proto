@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option csharp_namespace = "Servers.Vega";
+
+package FileManager;
+
+
+service FileService {
+	rpc UploadFile(UploadRequest) returns (UploadResponse);	
+}
+
+message UploadRequest{
+	string name=1;
+	bytes content=2;
+	string content_type=3;
+	string user_id=4;
+	string time_created=5;
+}
+
+message UploadResponse{
+	string message=1;
+	FileUploadStatus status=2;
+}
+
+enum FileUploadStatus {
+  SUCCESS = 0;
+  FAIL = 1;
+}

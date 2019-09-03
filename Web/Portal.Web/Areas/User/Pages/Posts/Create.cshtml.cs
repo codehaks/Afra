@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Protobuf;
+using Grpc.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Portal.Application.Posts;
+using Servers.Vega;
 
 namespace Portal.Web.Areas.User.Pages.Posts
 {
@@ -29,16 +32,18 @@ namespace Portal.Web.Areas.User.Pages.Posts
             using var ms1 = new MemoryStream();
             await PhotoFile.CopyToAsync(ms1);
             ms1.Position = 0;
-
-            var model = new Application.Posts.Models.PostAddModel
+                     
+            var channel = new Grpc.Core.Channel("localhost:5005", SslCredentials.Insecure);
+            var client = new Servers.Vega.FileService.FileServiceClient(channel);
+            
+            var result2 = client.UploadFile(new UploadRequest
             {
-                Body = this.Body,
-                Content = ms1.ToArray(),
-                MimeType = PhotoFile.ContentType,
-                UserId = ""
-            };
-
-            await _postService.Create(model);
+                Content = ByteString.CopyFrom(ms1.ToArray()),
+                ContentType = PhotoFile.ContentType,
+                Name = PhotoFile.Name,
+                TimeCreated = DateTime.Now.ToString(),
+                UserId = "myuser"
+            });
 
             return RedirectToPage("/index");
         }

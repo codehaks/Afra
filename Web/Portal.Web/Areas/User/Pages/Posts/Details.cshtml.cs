@@ -34,7 +34,6 @@ namespace Portal.Web.Areas.User.Pages.Posts
             //var channel = GrpcChannel.ForAddress("http://localhost:5005");
             //var client = new Servers.Vega.FileService.FileServiceClient(channel);
 
-            var c = new Grpc.Core.Channel()
             var channel = new Grpc.Core.Channel("localhost:5005", SslCredentials.Insecure);
             var client = new Servers.Vega.FileService.FileServiceClient(channel);
 

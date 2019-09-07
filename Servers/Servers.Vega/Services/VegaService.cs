@@ -45,6 +45,19 @@ namespace Servers.Vega
             return response;
         }
 
+        public override async Task<DownloadResponse> DownloadFile(DownloadRequest request, ServerCallContext context)
+        {
+            var doc =await  _db.Docs.FindAsync(request.PostId);
+            var response = new DownloadResponse
+            {
+                Content = ByteString.CopyFrom(doc.Content),
+                ContentType = doc.ContentType,
+                Name = doc.FileName
+            };
+
+            return response;
+        }
+
 
     }
 }

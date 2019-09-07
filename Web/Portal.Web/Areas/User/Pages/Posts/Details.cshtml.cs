@@ -24,15 +24,23 @@ namespace Portal.Web.Areas.User.Pages.Posts
         {
             PostViewModel = await _db.Posts.FindAsync(postId);
 
+          
+            return Page();
+        }
+
+        public async Task<IActionResult> OnGetImage(int postId)
+        {
+
             var channel = new Grpc.Core.Channel("localhost:5005", SslCredentials.Insecure);
             var client = new Servers.Vega.FileService.FileServiceClient(channel);
 
-            var result=await client.DownloadFileAsync(new Servers.Vega.DownloadRequest
+            var result = await client.DownloadFileAsync(new Servers.Vega.DownloadRequest
             {
-                PostId = PostViewModel.Id
+                PostId = postId
             });
 
-            return Page();
+
+            return File(result.Content.ToArray(), result.ContentType);
         }
     }
 }

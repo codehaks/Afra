@@ -1,4 +1,11 @@
 ﻿@page
 @model Portal.Web.Areas.User.Pages.Posts.DetailsModel
 @{
+    ViewData["title"] = "Details";
 }
+
+
+<img src="@Url.Page("Details","Image",new {postId=Model.PostViewModel.Id})" class="img-fluid" style="max-width:200px" />
+<h2>
+    @Model.PostViewModel.Body
+</h2>

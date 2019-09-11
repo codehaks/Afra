@@ -7,15 +7,18 @@ package Like;
 // The greeting service definition.
 service Liker {
   // Sends a greeting
-  rpc AllLike (LikesRequest) returns (TotalCountReply);
+  rpc GetLikes (PostIdRequest) returns (TotalLikesReply);
+  rpc AddLike (PostIdRequest) returns(Empty);
 }
 
 // The request message containing the user's name.
-message LikesRequest {
+message PostIdRequest {
   int32 post_id = 1;
 }
 
 // The response message containing the greetings.
-message TotalCountReply {
+message TotalLikesReply {
 	int32 total_count = 1;
 }
+
+message Empty{};

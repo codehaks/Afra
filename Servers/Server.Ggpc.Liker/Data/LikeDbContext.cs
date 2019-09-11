@@ -12,6 +12,6 @@ namespace Server.Ggpc.Liker.Data
         {
             
         }
-        public DbSet<Like>Likes { get; set; }
+        public DbSet<LikeModel>Likes { get; set; }
     }
 }

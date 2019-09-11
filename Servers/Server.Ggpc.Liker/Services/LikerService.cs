@@ -4,23 +4,30 @@ using System.Linq;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
+using Server.Ggpc.Liker.Data;
 
 namespace Server.Ggpc.Liker
 {
     public class LikerService : Liker.LikerBase
     {
         private readonly ILogger<LikerService> _logger;
-        public LikerService(ILogger<LikerService> logger)
+        private readonly LikeDbContext _likeDbContext;
+
+        public LikerService(ILogger<LikerService> logger , LikeDbContext likeDbContext)
         {
             _logger = logger;
+            _likeDbContext = likeDbContext;
         }
 
-        //public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
+        //public override async Task<TotalLikesReply> GetLikes(PostIdRequest request, ServerCallContext context)
         //{
-        //    return Task.FromResult(new HelloReply
-        //    {
-        //        Message = "Hello " + request.Name
-        //    });
+        //  var totalLikes= await  _likeDbContext.Likes.FindAsync(request.PostId);
+        //  var response = new TotalLikesReply()
+        //  {
+            
+        //  };
         //}
+
+
     }
 }

@@ -38,7 +38,8 @@ namespace Portal.Application.Posts
                 Id = p.Id,
                 Body = p.Body,
                 UserId = p.UserId,
-                TimeCreated = p.TimeCreated
+                TimeCreated = p.TimeCreated,
+                TotalLikeCount = 0
             }).ToList();
         }
     }

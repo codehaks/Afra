@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Server.Ggpc.Liker
 {
-    public class GreeterService : Greeter.GreeterBase
+    public class GreeterService : Liker.LikerBase
     {
         private readonly ILogger<GreeterService> _logger;
         public GreeterService(ILogger<GreeterService> logger)

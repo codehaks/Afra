@@ -18,8 +18,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.0.0-preview9.19423.6" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
 </Project>

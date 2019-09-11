@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Server.Ggpc.Liker.Data;
-using Server.Ggpc.Liker.Repository;
 
 namespace Server.Ggpc.Liker
 {
@@ -29,7 +24,6 @@ namespace Server.Ggpc.Liker
             services.AddDbContext<LikeDbContext>(option =>
                 option.UseSqlite(_configuration.GetConnectionString("DefaultConnection")));
             services.AddGrpc();
-            services.AddScoped(typeof(IGetByParameterRepositoryAsync<>), typeof(GetByParameterRepositoryAsync<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -23,14 +23,16 @@ namespace Server.Ggpc.Liker
             (bool isExted, LikeModel post)  = await  ExistedPost(request,cancellationToken);
             if (isExted)
             {
-                var likesOfPost =   TakeAllLikes(post.Id, cancellationToken);
+                var likesOfPost =   await  TakeAllLikes(post.Id, cancellationToken);
+                WritingInformationLog($"Total likes is: {likesOfPost} ");
                 return new TotalLikesReply()
                 {
-                    TotalCount = await likesOfPost
+                    TotalCount =  likesOfPost
                 };
             }
             else
             {
+                WritingInformationLog($"Total likes is: 0 ");
                 return new TotalLikesReply()
                 {
                     TotalCount = 0
@@ -39,14 +41,17 @@ namespace Server.Ggpc.Liker
 
           
         }
-        public override async Task<Empty> AddImageLike(PostIdRequest request, ServerCallContext context)
+        public override async Task<LikeStatus> AddImageLike(PostIdRequest request, ServerCallContext context)
         {
             var cancellationToken = context.CancellationToken;
             var (isExted, post) = await ExistedPost(request , cancellationToken);
             if (isExted)
             {
                 await UnLike(request,cancellationToken);
-                return new Empty();
+                return new LikeStatus()
+                {
+                    Status =LikeStatus.Types.Status.UnLike
+                };
             }
             else
             {
@@ -58,7 +63,10 @@ namespace Server.Ggpc.Liker
                 };
                 await _likeDbContext.Likes.AddAsync(like,cancellationToken);
                 WritingInformationLog($"added like :like id = {like.Id} by: user id {like.UserId}");
-                return new Empty();
+                return new LikeStatus()
+                {
+                    Status =LikeStatus.Types.Status.Like
+                };
             }
 
 
@@ -93,11 +101,13 @@ namespace Server.Ggpc.Liker
 
         private ValueTask<LikeModel> FindPostById(int postId , CancellationToken cancellationToken)
         {
+            WritingInformationLog($"Searching in db for find post with {postId} id");
             return _likeDbContext.Likes.FindAsync(postId,cancellationToken);
         }
 
         private Task<int> TakeAllLikes(int postId,CancellationToken cancellationToken)
         {
+            WritingInformationLog($"Take Task of total count of likes from db");
             return _likeDbContext.Likes.CountAsync(l => l.PostId == postId && l.IsLiked,cancellationToken);
         }
     }

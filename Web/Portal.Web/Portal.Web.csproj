@@ -31,6 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Protobuf Include="..\..\Servers\Server.Ggpc.Liker\Protos\like.proto">
+      <Link>Protos\like.proto</Link>
+    </Protobuf>
     <Protobuf Include="..\..\Servers\Servers.Vega\Protos\greet.proto">
       <Link>Protos\greet.proto</Link>
     </Protobuf>

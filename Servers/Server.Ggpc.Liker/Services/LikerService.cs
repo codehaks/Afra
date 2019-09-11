@@ -7,10 +7,10 @@ using Microsoft.Extensions.Logging;
 
 namespace Server.Ggpc.Liker
 {
-    public class GreeterService : Liker.LikerBase
+    public class LikerService : Liker.LikerBase
     {
-        private readonly ILogger<GreeterService> _logger;
-        public GreeterService(ILogger<GreeterService> logger)
+        private readonly ILogger<LikerService> _logger;
+        public LikerService(ILogger<LikerService> logger)
         {
             _logger = logger;
         }

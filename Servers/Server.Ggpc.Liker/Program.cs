@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
 
 namespace Server.Ggpc.Liker
@@ -21,6 +22,14 @@ namespace Server.Ggpc.Liker
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.ConfigureKestrel(options =>
+                    {
+                        options.ListenLocalhost(5006, listenOptions =>
+                        {
+                            listenOptions.Protocols = HttpProtocols.Http2;
+                            //listenOptions.UseHttps("testcert.pfx", "123456");
+                        });
+                    });
                     webBuilder.UseStartup<Startup>();
                 });
     }

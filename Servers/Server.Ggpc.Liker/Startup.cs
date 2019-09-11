@@ -31,7 +31,7 @@ namespace Server.Ggpc.Liker
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<GreeterService>();
+                endpoints.MapGrpcService<LikerService>();
 
                 endpoints.MapGet("/", async context =>
                 {

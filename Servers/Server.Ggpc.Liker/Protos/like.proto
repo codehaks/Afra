@@ -2,10 +2,10 @@ syntax = "proto3";
 
 option csharp_namespace = "Server.Ggpc.Liker";
 
-package Greet;
+package Like;
 
 // The greeting service definition.
-service Greeter {
+service Liker {
   // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply);
 }

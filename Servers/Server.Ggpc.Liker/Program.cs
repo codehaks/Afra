@@ -19,7 +19,7 @@ namespace Server.Ggpc.Liker
                 {
                     webBuilder.ConfigureKestrel(options =>
                     {
-                        options.ListenLocalhost(5006, listenOptions =>
+                        options.ListenLocalhost(5007, listenOptions =>
                         {
                             listenOptions.Protocols = HttpProtocols.Http2;
                             //listenOptions.UseHttps("testcert.pfx", "123456");

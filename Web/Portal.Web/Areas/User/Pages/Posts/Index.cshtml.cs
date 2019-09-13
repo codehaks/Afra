@@ -23,41 +23,50 @@ namespace Portal.Web.Areas.User.Pages.Posts
         {
             _postService = postService;
         }
-        
-        
-        public List<PostViewInfo> Posts { get; set; }
 
+
+        public List<PostViewInfo> Posts { get; set; }
 
         public async Task OnGetAsync(CancellationToken ct)
         {
             try
             {
                 var allPosts = _postService.GetAll();
-                var allPostsId = _postService.GetAll().Select(x=>x.Id).ToList();
-                var channel = new Channel("localhost:5006", SslCredentials.Insecure);
+                var allPostsId = _postService.GetAll().Select(x => x.Id);
+
+                var channel = new Channel("localhost:5007", SslCredentials.Insecure);
                 var client = new Liker.LikerClient(channel);
-              
+
                 var reply = await client.GetAllImagesAndLikesAsync(new Ids()
                 {
-                   ArrayPostid = { allPostsId}
-                },cancellationToken:ct);
+                    ArrayPostid = { allPostsId }
+                }, cancellationToken: ct);
 
-                for (int i = 0; i < allPosts.Count; i++)
+                if (reply.ImageLikeList.Any())
                 {
-                    //Posts.Select(x=>x.TotalLikeCount= reply.AllImagesLikes[i].TotalCount)
-                    Posts.Where(x => x.Id == reply.AllImagesLikes[i].PostId)
-                        .Select(x => x.TotalLikeCount = reply.AllImagesLikes[i].TotalCount);
+                    foreach (var like in reply.ImageLikeList)
+                    {
+                        var likedPost = allPosts.Where(p => p.Id == like.PostId).Select(l =>
+                         {
+                             l.TotalLikeCount = like.TotalCount;
+                             return l;
+                         });
 
+                        Posts = allPosts.Union(likedPost).ToList();
+                    }
+                }
+                else
+                {
+                    Posts = allPosts;
                 }
 
-                
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
             }
-                
+
 
         }
     }

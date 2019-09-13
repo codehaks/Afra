@@ -5,8 +5,26 @@
 }
 
 
+@*<img src="@Url.Page("Details","Image",new {postId=Model.PostViewModel.Id})" class="img-fluid" style="max-width:200px" />*@
 <img src="@Url.Page("Details","Image",new {postId=Model.PostViewModel.Id})" class="img-fluid" style="max-width:200px" />
 <h2>
     @Model.PostViewModel.Body
 </h2>
-<p>Like Count: <span>0</span></p>
+<p>Like Count: <span>@Model.Likes</span></p>
+<br/>
+<form method="post">
+    <button type="submit" class="btn btn-bock" asp-page-handler="OnPostImageAsync" asp-route-postId="@Model.PostViewModel.Id">Like<i class="fa fa-heart @(Model.IsLiked?"text-danger":"text-muted")"></i></button>
+</form>
+
+
+@*<script>
+    $(function () {
+        $('input[type=submit]').on('click', function (evt) {
+            evt.preventDefault();
+
+            $.post('', $('form').serialize(), function (result) {
+                alert('Posted using jQuery');
+            });
+        });
+    });
+</script>*@

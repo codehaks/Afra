@@ -9,23 +9,26 @@ service Liker {
   // Sends a greeting
   rpc GetImageLikes (PostIdRequest) returns (TotalLikesReply);
   rpc GetAllImagesAndLikes (Ids) returns (ImagesAndLikesReply);
-  rpc AddImageLike (PostIdRequest) returns(LikeStatus);
+  rpc AddImageLike (PostIdRequest) returns(Empty);
 }
 
+message Empty{}
 // The request message containing the user's name.
 message PostIdRequest {
   int32 post_id = 1;
   string user_Id=2;
-  enum Status {
-	  Like = 0;
-	  UnLike = 1;
-  }
-  Status status =3 ;
+ 
 }
 
 // The response message containing the greetings.
 message TotalLikesReply {
 	int32 total_count = 1;
+	string user_id=2;
+	enum Status {
+		Like = 0;
+		UnLike = 1;
+	}
+	Status status =3 ;
 }
 
 message LikeStatus{
@@ -41,14 +44,13 @@ message Ids{
 	repeated int32 array_postid =1;
 }
 
+
+
 message ImagesAndLikesReply{
-	message ImagesAndLikes{
+	message ImageAndLike{
 		int32 post_id=1;
 		int32 total_count=2;
 	}
-
-	repeated ImagesAndLikes all_images_likes =1;
-
-	
+	repeated ImageAndLike image_like_list =1;
 }
 

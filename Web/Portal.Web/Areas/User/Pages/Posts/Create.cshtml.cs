@@ -41,7 +41,7 @@ namespace Portal.Web.Areas.User.Pages.Posts
             };
 
             var postId=await _postService.Create(model);
-
+            var userId = User.GetUserId();
             #region Upload to Vega
 
             var channel = new Grpc.Core.Channel("localhost:5005", SslCredentials.Insecure);

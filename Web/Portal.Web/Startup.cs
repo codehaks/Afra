@@ -14,6 +14,8 @@ using Microsoft.Extensions.Hosting;
 using Portal.Application.Posts;
 using Portal.Domain.Identity;
 using Portal.Persistance;
+using Portal.Persistance.Identity;
+using Portal.Web.Common;
 
 namespace Portal.Web
 {
@@ -48,6 +50,7 @@ namespace Portal.Web
                 //options.Conventions.AuthorizeFolder("/admin", "RequireAdminRole");
 
             });
+            services.AddScoped<IUserIdentityService, UserIdentityService>();
             services.AddMvc();
             services.AddTransient<IPostService, PostService>();
 

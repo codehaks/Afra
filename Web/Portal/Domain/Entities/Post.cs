@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Portal.Domain.Entities
 {
-    public class Post: ITimeCreated
+    public class Post: ITimeCreated, IUserInfo
     {
         public int Id { get; set; }
         public string UserId { get; set; }

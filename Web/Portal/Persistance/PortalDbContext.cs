@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Portal.Domain.Core;
 using Portal.Domain.Entities;
@@ -7,6 +8,7 @@ using Portal.Persistance.Configs;
 using Portal.Persistance.Identity;
 using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,18 +16,30 @@ namespace Portal.Persistance
 {
     public class PortalDbContext : IdentityDbContext<ApplicationUser>
     {
-        public PortalDbContext(DbContextOptions<PortalDbContext> options, IUserIdentityService userIdentityService)
+        private readonly IHttpContextAccessor _ca;
+        private readonly IUserIdentityService _userIdentityService;
+
+        public PortalDbContext(DbContextOptions<PortalDbContext> options, IUserIdentityService userIdentityService, IHttpContextAccessor contextAccessor)
                 : base(options)
         {
-            UserId = userIdentityService.GetUserId();
+            _ca = contextAccessor;
+            _userIdentityService = userIdentityService;
         }
 
-        private readonly string UserId;
+        //private readonly string UserId;
 
         public DbSet<Post> Posts { get; set; }
 
         public override int SaveChanges()
         {
+            var identity = (ClaimsIdentity)_ca.HttpContext.User.Identity;
+            var userId = _ca.HttpContext?
+               .User
+               .Claims
+                .SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?
+                .Value;
+
+            var userId2 = _userIdentityService.GetUserId();
 
             foreach (var entry in ChangeTracker
                  .Entries()
@@ -38,30 +52,39 @@ namespace Portal.Persistance
                 }
             }
 
-            foreach (var entry in ChangeTracker
-                 .Entries()
-                 .Where(e => e.Entity is IUserInfo && e.State == EntityState.Added)
-                 .Select(e => e.Entity as IUserInfo))
-            {
+            //foreach (var entry in ChangeTracker
+            //     .Entries()
+            //     .Where(e => e.Entity is IUserInfo && e.State == EntityState.Added)
+            //     .Select(e => e.Entity as IUserInfo))
+            //{
 
-                entry.UserId = UserId;
+            //    entry.UserId = UserId;
 
-            }
+            //}
 
             return base.SaveChanges();
         }
 
         public override  Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            foreach (var entry in ChangeTracker
-                 .Entries()
-                 .Where(e => e.Entity is IUserInfo && e.State == EntityState.Added)
-                 .Select(e => e.Entity as IUserInfo))
-            {
+            var identity = (ClaimsIdentity)_ca.HttpContext.User.Identity;
+            var userId = _ca.HttpContext?
+               .User
+               .Claims
+                .SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?
+                .Value;
 
-                entry.UserId = UserId;
+            var userId2 = _userIdentityService.GetUserId();
 
-            }
+            //foreach (var entry in ChangeTracker
+            //     .Entries()
+            //     .Where(e => e.Entity is IUserInfo && e.State == EntityState.Added)
+            //     .Select(e => e.Entity as IUserInfo))
+            //{
+
+            //    entry.UserId = UserId;
+
+            //}
             return base.SaveChangesAsync(cancellationToken);
         }
 

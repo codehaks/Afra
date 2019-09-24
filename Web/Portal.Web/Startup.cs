@@ -30,6 +30,7 @@ namespace Portal.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IUserClaimsPrincipalFactory<ApplicationUser>, MyClaimsPrincipalFactory>();
             services.AddDbContext<PortalDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
@@ -39,7 +40,7 @@ namespace Portal.Web
 
 
 
-            services.AddDefaultIdentity<ApplicationUser>(
+            services.AddIdentity<ApplicationUser,IdentityRole>(
                 options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<PortalDbContext>();
 

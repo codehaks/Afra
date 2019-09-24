@@ -1,0 +1,17 @@
+﻿@page
+@model Portal.Web.Areas.User.Pages.Profile.EditModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["title"]="Edit Profile";
+}
+
+    <form method="post">
+        <p>
+            <input asp-for="FirstName" class="form-control" />
+        </p>
+        <p>
+            <input asp-for="LastName" class="form-control"/>
+        </p>
+
+        <button>Submit</button>
+    </form>

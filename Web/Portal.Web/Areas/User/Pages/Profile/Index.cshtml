@@ -1,0 +1,19 @@
+﻿@page
+@model Portal.Web.Areas.User.Pages.Profile.IndexModel
+@{
+    ViewData["title"] = "Profile";
+}
+
+<h1>Profile</h1>
+
+<p>
+    First Name : @Model.FirstName
+</p>
+<p>
+    Last Name : @Model.LastName
+</p>
+<p>
+    Email : @Model.Email
+</p>
+
+<a asp-page="edit" asp-area="user" class="btn btn-primary">Edit</a>

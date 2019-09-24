@@ -42,12 +42,24 @@ namespace Portal.Web.Areas.User.Pages.Profile
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var user = await _userManager.FindByIdAsync(userId);
 
-            //user.FirstName = FirstName;
-            //user.LastName = LastName;
-            user.Email = Email;           
+            var firstNameClaim = new Claim(nameof(FirstName), FirstName);
+            var lastNameClaim = new Claim(nameof(LastName), LastName);
+            var claimsList = new List<Claim>
+            {
+                firstNameClaim,
+                lastNameClaim
+            };
 
+            var claims = (await _userManager.GetClaimsAsync(user))
+               .Where(c => c.Type == nameof(FirstName) || c.Type == nameof(LastName));
+
+            await _userManager.RemoveClaimsAsync(user, claims);
             await _userManager.UpdateAsync(user);
 
+            await _userManager.AddClaimsAsync(user, claimsList); 
+            await _userManager.UpdateAsync(user);
+
+        
 
             return RedirectToPage("./index");
         }

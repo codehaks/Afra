@@ -22,14 +22,14 @@ namespace Servers.Vega
                  Host.CreateDefaultBuilder(args)
           .ConfigureWebHostDefaults(webBuilder =>
           {
-              webBuilder.ConfigureKestrel(options =>
-              {
-                  options.ListenLocalhost(5005, listenOptions =>
-                  {
-                      listenOptions.Protocols = HttpProtocols.Http2;
-                      //listenOptions.UseHttps("testcert.pfx", "123456");
-                  });
-              });
+              //webBuilder.ConfigureKestrel(options =>
+              //{
+              //    options.ListenLocalhost(5005, listenOptions =>
+              //    {
+              //        listenOptions.Protocols = HttpProtocols.Http2;
+              //        //listenOptions.UseHttps("testcert.pfx", "123456");
+              //    });
+              //});
               webBuilder.UseStartup<Startup>();
           });
     }

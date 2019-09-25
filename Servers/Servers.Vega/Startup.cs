@@ -20,7 +20,7 @@ namespace Servers.Vega
         {
             services.AddDbContext<VegaDbContext>(options =>
             options.UseSqlite("Data Source=vega.sqlite"));
-            services.AddHealthChecks();
+            services.AddHealthChecks().AddCheck<VegaHealthCheck>("vega");
             services.AddGrpc();
             services.AddMvc();
         }

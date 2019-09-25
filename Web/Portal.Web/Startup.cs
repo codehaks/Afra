@@ -55,7 +55,8 @@ namespace Portal.Web
             });
             services.AddScoped<IUserIdentityService, UserIdentityService>();
             services.AddMvc();
-            services.AddHealthChecks();
+            services.AddHealthChecks()
+                    .AddCheck<PortalWebHealthCheck>("portalweb_health_check");
             services.AddTransient<IPostService, PostService>();
 
         }

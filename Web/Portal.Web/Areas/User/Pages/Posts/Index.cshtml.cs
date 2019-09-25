@@ -34,7 +34,8 @@ namespace Portal.Web.Areas.User.Pages.Posts
                 var allPosts = _postService.GetAll();
                 var allPostsId = _postService.GetAll().Select(x => x.Id);
 
-                var channel = new Channel("localhost:5007", SslCredentials.Insecure);
+                //var channel = new Channel("localhost:5007", SslCredentials.Insecure);
+               var channel= GrpcChannel.ForAddress("https://localhost:5007");
                 var client = new Liker.LikerClient(channel);
 
                 var reply = await client.GetAllImagesAndLikesAsync(new Ids()

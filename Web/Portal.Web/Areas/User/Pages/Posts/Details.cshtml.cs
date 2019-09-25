@@ -29,7 +29,7 @@ namespace Portal.Web.Areas.User.Pages.Posts
         {
             PostViewModel = await _db.Posts.FindAsync(postId);
 
-            var likeChannel = new Grpc.Core.Channel("localhost:5007", SslCredentials.Insecure);
+            var likeChannel = GrpcChannel.ForAddress("https://localhost:5007");
             var likeClient = new Liker.LikerClient(likeChannel);
             var likeReply = await likeClient.GetImageLikesAsync(new PostIdRequest()
             {
@@ -55,7 +55,7 @@ namespace Portal.Web.Areas.User.Pages.Posts
             //var channel = GrpcChannel.ForAddress("http://localhost:5005");
             //var client = new Servers.Vega.FileService.FileServiceClient(channel);
 
-            var channel = new Grpc.Core.Channel("localhost:5005", SslCredentials.Insecure);
+            var channel = GrpcChannel.ForAddress("https://localhost:5005");
             var client = new Servers.Vega.FileService.FileServiceClient(channel);
 
             var result = await client.DownloadFileAsync(new Servers.Vega.DownloadRequest
@@ -69,7 +69,7 @@ namespace Portal.Web.Areas.User.Pages.Posts
 
         public async Task<IActionResult> OnPostAsync(int postId)
         {
-            var likeChannel = new Grpc.Core.Channel("localhost:5007", SslCredentials.Insecure);
+            var likeChannel = GrpcChannel.ForAddress("https://localhost:5007");
             var likeClient = new Liker.LikerClient(likeChannel);
 
             var reply = await likeClient.AddImageLikeAsync(new PostIdRequest()

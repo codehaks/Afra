@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,18 +10,32 @@ namespace Portal.Web
 {
     public class PortalWebHealthCheck : IHealthCheck
     {
-        public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
+        public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
+            var client = new HttpClient();
+
+
             var healthCheckResultHealthy = true;
+
+            var vegaHealth = await client.GetStringAsync("https://localhost:5005/health");
+            if (vegaHealth != "healthy")
+            {
+                healthCheckResultHealthy = false;
+            }
+
+            //if (await client.GetStringAsync("https://localhost:5007") != "healthy")
+            //{
+            //    healthCheckResultHealthy = false;
+            //}
 
             if (healthCheckResultHealthy)
             {
-                return Task.FromResult(
-                    HealthCheckResult.Healthy("healthy"));
+                return
+                    HealthCheckResult.Healthy("healthy1");
             }
 
-            return Task.FromResult(
-                HealthCheckResult.Unhealthy("unhealthy"));
+            return
+                HealthCheckResult.Unhealthy("unhealthy1");
         }
     }
 }

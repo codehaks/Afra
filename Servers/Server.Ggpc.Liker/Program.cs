@@ -17,15 +17,7 @@ namespace Server.Ggpc.Liker
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.ConfigureKestrel(options =>
-                    {
-                        options.ListenLocalhost(5007, listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http2;
-                            //listenOptions.UseHttps("testcert.pfx", "123456");
-                        });
-                    });
-                    webBuilder.UseStartup<Startup>();
+                     webBuilder.UseStartup<Startup>();
                 });
     }
 }

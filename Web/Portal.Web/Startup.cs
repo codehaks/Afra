@@ -55,6 +55,7 @@ namespace Portal.Web
             });
             services.AddScoped<IUserIdentityService, UserIdentityService>();
             services.AddMvc();
+            services.AddHealthChecks();
             services.AddTransient<IPostService, PostService>();
 
         }
@@ -74,6 +75,7 @@ namespace Portal.Web
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHealthChecks("/health");
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
             });

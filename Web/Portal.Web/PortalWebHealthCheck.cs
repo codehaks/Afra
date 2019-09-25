@@ -12,13 +12,16 @@ namespace Portal.Web
     {
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
-            var client = new HttpClient();
+            using var client = new HttpClient
+            {
+                DefaultRequestVersion = new Version(2, 0)
+            };
 
 
             var healthCheckResultHealthy = true;
 
             var vegaHealth = await client.GetStringAsync("https://localhost:5005/health");
-            if (vegaHealth != "healthy")
+            if (vegaHealth.ToLower() != "healthy")
             {
                 healthCheckResultHealthy = false;
             }
@@ -31,11 +34,11 @@ namespace Portal.Web
             if (healthCheckResultHealthy)
             {
                 return
-                    HealthCheckResult.Healthy("healthy1");
+                    HealthCheckResult.Healthy("healthy");
             }
 
             return
-                HealthCheckResult.Unhealthy("unhealthy1");
+                HealthCheckResult.Unhealthy("unhealthy");
         }
     }
 }
